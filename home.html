@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1, user-scalable=no">
+    <title>YIN's Field</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    
+</head>
+<body>
+    <!-- 视频背景 -->
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="bgVideo.MP4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    <div class="video-overlay"></div>
+
+    <header class="header">
+        <div class="logo">YIN's Field</div>
+        <nav class="nav" id="navMenu">
+            <a href="work.html" class="nav-link">工/Intern</a>
+            <a href="project.html" class="nav-link">项/Proj</a>
+            <a href="moments.html" class="nav-link">瞬/Moments</a>
+            <button id="about-btn" class="nav-link">我/About</button>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="text-section">
+            <p class="welcome-text">Welcome to</p>
+            <h1 class="title">YIN's Field</h1>
+            <div class="lyrics" id="lyricsArea">
+                <div class="lyrics-current" id="lyricsCurrent">
+                    <span class="line1">"风轻颂自由，</span>
+                    <span class="line2">我倾听岁月温柔。"</span>
+                </div>
+                <ul class="song-list" id="songList">
+                    <li data-index="0">光阴独白</li>
+                    <li data-index="1">夏夜最后的烟火</li>
+                    <li data-index="2">给电影人的情书</li>
+                    <li data-index="3">送你一朵小红花</li>
+                    <li data-index="4">追光者</li>
+                    <li data-index="5">私奔</li>
+                    <li data-index="6">时光正好</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="player-section">
+            <div class="player-container" id="playerContainer">
+                <svg class="disc-progress-ring" viewBox="0 0 420 420">
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="100%" stop-color="#ffffff" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <circle class="progress-track" cx="210" cy="210" r="195" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+                    <circle class="progress-bar" cx="210" cy="210" r="195" fill="none" stroke="url(#progressGradient)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+                </svg>
+                <div class="outer-disc">
+                    <div class="inner-disc"></div>
+                </div>
+            </div>
+
+            <div id="miniControlBar" class="mini-control-bar">
+                <div class="mini-disc-icon">
+                    <div class="mini-outer-disc">
+                        <div class="mini-inner-disc"></div>
+                    </div>
+                </div>
+                <button class="ctrl-btn prev-btn" id="miniPrevBtn">⏮</button>
+                <button class="ctrl-btn play-pause-btn" id="miniPlayPauseBtn">▶</button>
+                <button class="ctrl-btn next-btn" id="miniNextBtn">⏭</button>
+                <button class="ctrl-btn menu-btn" id="miniMenuBtn">☰</button>
+            </div>
+
+            <!-- 新版个人信息卡片 (替换原来的about-card) -->
+            <div id="about-card" class="about-card">
+                <div class="card-container">
+                    <!-- 顶部：名字 + 头像 -->
+                    <div class="header-section">
+                        <div class="name-area">
+                            <div class="my-name">羽生</div>
+                            <div class="signature">祝我们此生兴致盎然，烟火灿烂。</div>
+                        </div>
+
+                        <div class="avatar-circle">
+                            <img src="/头像/头像1.jpg" alt="avatar">
+                        </div>
+                    </div>
+
+                    <!-- 可展开模块 -->
+                    <div class="expand-list">
+                        <div class="expand-item">
+                            <div class="expand-header">
+                                <span>教育经历 / Edu</span>
+                                <span class="toggle-btn">+</span>
+                            </div>
+                            <div class="expand-content">
+                                • 香港浸会大学 · 传理学院<br>
+                                  | 人工智能与数字媒体  理学硕士 (2025-2026)<br><br>
+                                • 南京传媒学院 · 国际传播学院<br>
+                                  | 时尚传播  文学学士 (2021-2025)<br>
+                                  | 人工智能作曲与音乐交互制作  辅修微专业<br><br>
+                                • 交流教学（境内）：美国密苏里大学 · 新闻学院<br>
+                                  | 人工智能在新闻传播领域的应用<br>
+                                  | 微电影/微纪录片技术和艺术<br><br>
+                                • 交换研学（境外）：澳门城市大学 媒体文化与艺术
+                            </div>
+                        </div>
+
+                        <div class="expand-item">
+                            <div class="expand-header">
+                                <span>技术栈 / Skill</span>
+                                <span class="toggle-btn">+</span>
+                            </div>
+                            <div class="expand-content">
+                                ✦ AI工具：Comfy UI、Stable Diffusion、ControlNet、Liblib、Midjourney、Runway、即梦、可灵 等<br><br>
+                                ✦ 编程与开发：Python、SQL、HTML/CSS/JS、VS Code、Google Colab、Arduino<br><br>
+                                ✦ 设计与创意： Figma、PS、Canva、Office、幕布<br><br>
+                                ✦ 音视频制作：Pr、Au、Sibelius<br><br>
+                                ✦ 语言与证书： PTE69（≈雅思6.5）、CET-4/6、普通话一乙证书、C1驾照
+                            </div>
+                        </div>
+
+                        <div class="expand-item">
+                            <div class="expand-header">
+                                <span>联络 / Contact</span>
+                                <span class="toggle-btn">+</span>
+                            </div>
+                            <div class="expand-content">
+                                •  邮箱: 111@163.com<br>
+                                •  微信: 111
+                            </div>
+                        </div>
+
+                        <div class="expand-item">
+                            <div class="expand-header">
+                                <span>声明 / Statement</span>
+                                <span class="toggle-btn">+</span>
+                            </div>
+                            <div class="expand-content">
+                                本网站背景图片、视频等素材为本人使用AI生成；部分唱片封面图片及歌词来源网络，仅供个人展示使用，侵权请联系删除。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <audio id="audio" preload="auto"></audio>
+    <script src="home.js"></script>
+</body>
+</html>
