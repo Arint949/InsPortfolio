@@ -510,47 +510,6 @@ body {
     display: none;
 }
 
-
-
-
-
-
-
-/* B站视频全屏背景容器 */
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    overflow: hidden;
-}
-
-/* iframe 全屏覆盖 */
-.bg-iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    pointer-events: none;  /* 让视频不干扰点击页面其他元素 */
-}
-
-/* 深色半透明遮罩层 */
-.video-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: -1;
-    pointer-events: none;
-}
-
 /* ===================================== */
 /* 响应式布局 - 确保播放器正方形 + 卡片自适应 */
 /* ===================================== */
