@@ -9,16 +9,12 @@
     
 </head>
 <body>
-    <div class="video-background">
-        <iframe 
-            src="https://player.bilibili.com/player.html?aid=794041457&bvid=BV1EC4y1r7xZ&cid=1414635475&p=1&autoplay=1&muted=1&loop=1&danmaku=0"
-            frameborder="0"
-            allowfullscreen="true"
-            allow="autoplay; fullscreen"
-            class="bg-iframe">
-        </iframe>
-        <div class="video-overlay"></div>
-    </div>
+    <!-- 视频背景 -->
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="bgVideo.MP4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+    <div class="video-overlay"></div>
 
     <header class="header">
         <div class="logo">YIN's Field</div>
