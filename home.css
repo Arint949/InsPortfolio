@@ -223,7 +223,8 @@ body {
 .lyrics {
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 360px;  /* 固定示例歌词容器宽度*/
+    align-items: center;
     height: 110px;
     overflow: hidden;
     font-family: 'font-lyrics';
@@ -252,16 +253,20 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     background: transparent;
-}
-.song-list::-webkit-scrollbar {
-    display: none;
+    display: flex;           /* 新增 */
+    flex-direction: column;  /* 新增 */
 }
 .song-list li {
-    padding: 3.8px 0;
+    padding: 3.8px 10px;
     cursor: pointer;
     transition: opacity 0.25s, color 0.2s, text-shadow 0.2s;
     color: #fff;
     font-size: 1.8rem;
+    width: 240px;            /* 保留固定宽度 */
+    align-items: center;     /* 新增：左对齐 */
+}
+.song-list::-webkit-scrollbar {
+    display: none;
 }
 .song-list li:hover {
     background: none;
@@ -288,15 +293,15 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    /* 保证播放器始终居中 */
     flex: 1 1 auto;
     min-width: 300px;
 }
 
 .player-container {
     position: relative;
-    width:340px;
-    height: 340px;
+    width:420px;  /* 固定唱片宽度 */
+    height: 420px;
     transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1) !important;
     z-index: 10;
     flex-shrink: 0;
@@ -540,7 +545,7 @@ body {
 }
 
 /* ===================================== */
-/* 响应式布局 - 完全同步 work.css 的断点和数值 */
+/* 响应式布局 */
 /* ===================================== */
 @media (max-width: 1600px) {
     .header {
@@ -719,7 +724,15 @@ body {
     .expand-content {
         font-size: 0.9rem;
     }
-
+    .song-list {
+    align-items: center;   /* 让整个列表居中对齐 */
+    }
+    .song-list li {
+    font-size: 1.2rem;
+    width: auto;          /* 小屏自适应宽度，或改为 80% 等 */
+    max-width: 160px;     /* 限制最大宽度 */
+    align-items: center;     /* 新增 */
+    }
     /* ========== 关键修复：让固定宽度元素自适应，防止溢出缩放 ========== */
     .text-section {
         width: 100%;
@@ -730,15 +743,8 @@ body {
     /* 修改歌词容器（示例歌词）的字体大小 */
     .lyrics {
         max-width: 100%;
-        font-size: 1.2rem;  /* 原来默认是 1.8rem，你可以改成 1.2rem ~ 1.6rem 之间 */
+        font-size: 1.2rem;
     }
-
-    /* 修改歌单列表（弹出来的列表）的字体大小 */
-    .song-list li {
-        font-size: 1.2rem;  /* 与上面的保持一致，视觉才统一 */
-    }
-    
-
     .player-section {
         min-width: 0;
     }
