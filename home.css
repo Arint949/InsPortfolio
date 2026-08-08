@@ -184,7 +184,7 @@ body {
     padding-left: 22rem;
     padding-right: 22rem;
     padding-top: 2rem;
-    gap: 10rem;  /*左右间距*/
+    gap: 10rem;  /* 默认间距，会在断点中调整 */
 }
 
 .text-section {
@@ -248,11 +248,11 @@ body {
     display: none;
 }
 .song-list li {
-    padding: 3.8px 0;  /* 增加垂直内边距，保持行距一致 */
+    padding: 3.8px 0;
     cursor: pointer;
     transition: opacity 0.25s, color 0.2s, text-shadow 0.2s;
     color: #fff;
-    font-size: 1.8rem;  /* 与歌词字体大小一致 */
+    font-size: 1.8rem;
 }
 .song-list li:hover {
     background: none;
@@ -323,7 +323,7 @@ body {
     height: 30px !important;
     margin-left: 2px;
     transition: all 0.3s ease;
-    cursor: pointer;  /* 迷你唱片模式下，统一鼠标为手指 */
+    cursor: pointer;
     position: static !important;
 }
 .player-container.mini-disc .disc-progress-ring {
@@ -369,7 +369,7 @@ body {
     background: transparent;
     backdrop-filter: none;
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 6px; /* 圆角边框 */
+    border-radius: 6px;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
@@ -437,13 +437,11 @@ body {
     background: rgba(0,0,0,0.2);
 }
 
-
-
 .avatar-circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.8s ease;   /* 添加渐变效果 */
+    transition: opacity 0.8s ease;
 }
 
 /* 可展开列表区域：独立滚动，但隐藏滚动条 */
@@ -510,16 +508,38 @@ body {
     display: none;
 }
 
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    object-fit: cover;
+}
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* ===================================== */
-/* 响应式布局 - 确保播放器正方形 + 卡片自适应 */
+/* 响应式布局 - 完全同步 work.css 的断点和数值 */
 /* ===================================== */
 @media (max-width: 1600px) {
     .header {
-        padding: 1.2rem 16rem;
+        padding: 1.2rem 18rem;
     }
     .main {
         padding: 2rem 18rem;
-        gap: 6rem;
+        gap: 6rem;          /* 同步 work 的间距感受 */
     }
     .welcome-text {
         font-size: 1.6rem;
@@ -531,15 +551,12 @@ body {
         width: 315px !important;
         height: 315px !important;
     }
-
-    /* 新增：About 卡片宽度固定，头像区域居中 */
     .about-card {
         width: 88vw;
         max-width: 88vw;
         min-width: 360px;
         height: 390px;
     }
-
     .avatar-circle {
         margin: 0 auto;
     }
@@ -553,23 +570,24 @@ body {
         font-size: 1.2rem;
     }
     .expand-header {
-        font-size: 1.4rem;    
-        padding: 6px 0;  /* 信息header间距 */
+        font-size: 1.4rem;
+        padding: 6px 0;
     }
     .expand-content {
         font-size: 1rem;
     }
-    .avatar-circle {   /* 头像缩小，适应小屏幕 */
+    .avatar-circle {
         width: 98px;
         height: 98px;
     }
 }
+
 @media (max-width: 1280px) {
     .header {
-        padding: 1.2rem 10rem;
+        padding: 1.2rem 4rem;
     }
     .main {
-        padding: 2rem 30rem;
+        padding: 2rem 4rem;
         gap: 1rem;
     }
     .welcome-text {
@@ -582,15 +600,12 @@ body {
         width: 315px !important;
         height: 315px !important;
     }
-
-    /* 新增：About 卡片宽度固定，头像区域居中 */
     .about-card {
         width: 88vw;
         max-width: 88vw;
         min-width: 340px;
         height: 390px;
     }
-
     .avatar-circle {
         margin: 0 auto;
     }
@@ -604,25 +619,25 @@ body {
         font-size: 1.2rem;
     }
     .expand-header {
-        font-size: 1.3rem;    
-        padding: 3px 0;  /* 信息header间距 */
+        font-size: 1.3rem;
+        padding: 3px 0;
     }
     .expand-content {
         font-size: 0.9rem;
     }
-    .avatar-circle {   /* 头像缩小，适应小屏幕 */
+    .avatar-circle {
         width: 110px;
         height: 110px;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .menu-toggle {
         display: flex;
         margin-left: auto;
     }
     .header {
-        padding: 1.2rem 1.4rem;
+        padding: 1.2rem 2rem;
     }
     .nav {
         position: fixed;
@@ -643,7 +658,7 @@ body {
     .main {
         flex-direction: column;
         text-align: center;
-        padding: 2.4rem 1.2rem;
+        padding: 2.4rem 2rem;
     }
     .player-container {
         width: 310px !important;
@@ -655,15 +670,12 @@ body {
     .expand-list {
         text-align: left;
     }
-
     .welcome-text {
         font-size: 1.8rem;
     }
     .title {
         font-size: 3.4rem;
     }
-
-    /* 新增：About 卡片宽度固定，头像区域居中 */
     .about-card {
         width: 88vw;
         max-width: 88vw;
@@ -677,11 +689,9 @@ body {
     .name-area {
         text-align: center;
     }
-    .avatar-circle {   /* 头像缩小，适应小屏幕 */
+    .avatar-circle {
         width: 87px;
         height: 87px;
-    }
-    .avatar-circle {
         margin: 0 auto;
     }
     .expand-list {
@@ -694,7 +704,7 @@ body {
         font-size: 1.2rem;
     }
     .expand-header {
-        font-size: 1.3rem;    
+        font-size: 1.3rem;
         padding: 10px 0;
     }
     .expand-content {
@@ -703,7 +713,7 @@ body {
 }
 
 /* ===================================== */
-/* 交换模式：所有宽度小于1280px的屏幕都启用 */
+/* 交换模式：宽度小于 1500px 时隐藏名字显示头像（与 work 同步） */
 /* ===================================== */
 @media (max-width: 1500px) {
     .avatar-circle {
@@ -715,14 +725,11 @@ body {
     .swap-mode .name-area {
         display: none;
     }
-
     .swap-mode .avatar-circle {
         display: block;
         animation: slideInRight 0.4s ease-out;
-        cursor: pointer;          /* 保留手指光标，但不影响滚轮滑动 */
+        cursor: pointer;
     }
-
-    /* 鼠标变成手指，提示可点击 */
     .my-name,
     .avatar-circle {
         cursor: pointer;
@@ -752,7 +759,7 @@ body {
     }
 }
 
-/* 条形播放器样式 */
+/* 条形播放器样式（原有，未改动） */
 .mini-control-wrapper {
     display: inline-flex;
     align-items: center;
