@@ -667,11 +667,11 @@ body {
     .main {
         flex-direction: column;
         text-align: center;
-        padding: 2.4rem 2rem;
+        padding: 2rem 2rem;
     }
     .player-container {
-        width: 310px !important;
-        height: 310px !important;
+        width: 240px !important;
+        height: 240px !important;
     }
     .expand-content {
         text-align: left;
@@ -680,10 +680,10 @@ body {
         text-align: left;
     }
     .welcome-text {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
     .title {
-        font-size: 3.4rem;
+        font-size: 2.4rem;
     }
     .about-card {
         width: 88vw;
@@ -726,9 +726,19 @@ body {
         max-width: 100%;
         flex: 0 0 auto;
     }
+
+    /* 修改歌词容器（示例歌词）的字体大小 */
     .lyrics {
         max-width: 100%;
+        font-size: 1.2rem;  /* 原来默认是 1.8rem，你可以改成 1.2rem ~ 1.6rem 之间 */
     }
+
+    /* 修改歌单列表（弹出来的列表）的字体大小 */
+    .song-list li {
+        font-size: 1.2rem;  /* 与上面的保持一致，视觉才统一 */
+    }
+    
+
     .player-section {
         min-width: 0;
     }
@@ -871,4 +881,4 @@ body {
 .song-popup-list li.active {
     font-weight: bold;
     text-shadow: 0 0 6px #fff;
-}
+} 
