@@ -111,7 +111,6 @@ audio.onpause = () => {
 
 audio.addEventListener("timeupdate", () => {
     savePlayerState();
-    // 更新进度环（只显示，不拖拽）
     if (audio.duration && isFinite(audio.duration)) {
         const circumference = 2 * Math.PI * 195;
         const offset = circumference * (1 - audio.currentTime / audio.duration);
@@ -139,13 +138,11 @@ songList.querySelectorAll("li").forEach(li => {
             currentTrackIndex = idx;
             loadTrack(currentTrackIndex);
         }
-        // 从头播放
         audio.currentTime = 0;
         audio.play().catch(err => {
             console.warn("播放需要用户交互:", err);
             alert("请点击页面任意位置后重试播放");
         });
-        // 触摸模式下不隐藏列表，由外部点击隐藏；鼠标模式下悬停保持显示
     });
 });
 
@@ -157,32 +154,75 @@ const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 if (isTouchDevice) {
     // ---------- 触摸模式 ----------
     lyricsArea.classList.add('touch-mode');
-    // 点击歌词区域切换列表显示
-    lyricsArea.addEventListener('click', function(e) {
-        if (e.target.closest('.song-list')) return; // 点击列表内部不切换
-        this.classList.toggle('show-list');
-    });
-    // 点击列表内部不关闭（由歌单项处理）
-    songList.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-    // 点击外部空白处关闭列表
-    document.addEventListener('click', function(e) {
-        if (!lyricsArea.contains(e.target)) {
-            lyricsArea.classList.remove('show-list');
+
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let isSwiping = false;
+
+    // 切换列表显示状态
+    const toggleList = (show) => {
+        if (show !== undefined) {
+            lyricsArea.classList.toggle('show-list', show);
+        } else {
+            lyricsArea.classList.toggle('show-list');
         }
-    });
+    };
+
+    // 全局触摸事件：只处理列表显示时的滑动和点击
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isSwiping = false;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        const listVisible = lyricsArea.classList.contains('show-list');
+        if (!listVisible) return;
+
+        // 计算垂直滑动距离
+        const deltaY = e.touches[0].clientY - touchStartY;
+        if (Math.abs(deltaY) > 5) isSwiping = true;
+
+        // 阻止页面滚动，并将滑动应用于歌单列表
+        e.preventDefault();
+        songList.scrollTop -= deltaY; // 注意方向：上滑手指下移，列表应向上滚动
+        touchStartY = e.touches[0].clientY; // 更新基准点，实现连续滑动
+    }, { passive: false });
+
+    document.addEventListener('touchend', (e) => {
+        // 如果是滑动操作，不触发点击
+        if (isSwiping) {
+            return;
+        }
+
+        const target = e.target;
+
+        // 点击在歌词区域内
+        if (lyricsArea.contains(target)) {
+            // 如果点击的是歌单项，触发播放（利用已有的 click 事件）
+            const li = target.closest('.song-list li');
+            if (li) {
+                li.click();
+                return;
+            }
+            // 否则点击示例歌词区域，切换列表显示
+            toggleList();
+        } else {
+            // 点击外部空白，关闭列表
+            if (lyricsArea.classList.contains('show-list')) {
+                toggleList(false);
+            }
+        }
+    }, { passive: true });
 } else {
     // ---------- 鼠标模式 ----------
     // 完全依赖 CSS :hover，无需 JS 干预
-    // 但为了保证歌单点击和外部点击不影响悬停，无需额外代码
 }
 
 // ===============================
 // 大唱片点击切换播放/暂停（保留当前位置）
 // ===============================
 playerContainer.addEventListener('click', function(e) {
-    // 如果点击的是进度环内部也视为点击唱片
     e.stopPropagation();
     if (audio.paused) {
         audio.play().catch(err => console.warn('播放失败', err));
@@ -356,22 +396,22 @@ function setAvatarImage(index) {
 function nextAvatar() { currentAvatarIndex = (currentAvatarIndex + 1) % avatarList.length; setAvatarImage(currentAvatarIndex); }
 function prevAvatar() { currentAvatarIndex = (currentAvatarIndex - 1 + avatarList.length) % avatarList.length; setAvatarImage(currentAvatarIndex); }
 function onWheel(e) { if (!isAvatarVisible()) return; e.preventDefault(); e.deltaY > 0 ? nextAvatar() : prevAvatar(); }
-let touchStartY = 0, touchEndY = 0;
-function onTouchStart(e) { if (!isAvatarVisible()) return; touchStartY = e.touches[0].clientY; }
-function onTouchMove(e) { if (!isAvatarVisible()) return; touchEndY = e.touches[0].clientY; }
-function onTouchEnd(e) {
+let touchStartYAvatar = 0, touchEndYAvatar = 0;
+function onTouchStartAvatar(e) { if (!isAvatarVisible()) return; touchStartYAvatar = e.touches[0].clientY; }
+function onTouchMoveAvatar(e) { if (!isAvatarVisible()) return; touchEndYAvatar = e.touches[0].clientY; }
+function onTouchEndAvatar(e) {
     if (!isAvatarVisible()) return;
-    if (touchStartY === 0) return;
-    const deltaY = touchEndY - touchStartY;
+    if (touchStartYAvatar === 0) return;
+    const deltaY = touchEndYAvatar - touchStartYAvatar;
     if (Math.abs(deltaY) < 30) return;
     deltaY > 0 ? prevAvatar() : nextAvatar();
-    touchStartY = 0; touchEndY = 0;
+    touchStartYAvatar = 0; touchEndYAvatar = 0;
 }
 if (avatarCircle) {
     avatarCircle.addEventListener('wheel', onWheel, { passive: false });
-    avatarCircle.addEventListener('touchstart', onTouchStart);
-    avatarCircle.addEventListener('touchmove', onTouchMove);
-    avatarCircle.addEventListener('touchend', onTouchEnd);
+    avatarCircle.addEventListener('touchstart', onTouchStartAvatar);
+    avatarCircle.addEventListener('touchmove', onTouchMoveAvatar);
+    avatarCircle.addEventListener('touchend', onTouchEndAvatar);
 }
 if (avatarImg && avatarImg.src !== avatarList[0]) avatarImg.src = avatarList[0];
 if (avatarImg) avatarImg.style.opacity = '1';
