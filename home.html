@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>YIN's Field</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
-    
+    <link rel="stylesheet" href="home.css"> 
 </head>
 <body>
-    <!-- 视频背景 -->
-    <video autoplay muted loop playsinline id="bgVideo">
-        <source src="bgVideo1.mp4" type="video/mp4">
-        您的浏览器不支持视频标签。
+    <!-- 视频背景 – 新增 webkit-playsinline 和 preload -->
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto" id="bgVideo" class="bg-video">
+        <source src="https://videos.tuchuangyun.top/autoupload/f/QzmDMjvz_9ylkTfb6YY3PdiO_OyvX7mIgxFBfDMDErs/20260531/wzv3/bgVideo.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
 
@@ -86,22 +84,18 @@
                 <button class="ctrl-btn menu-btn" id="miniMenuBtn">☰</button>
             </div>
 
-            <!-- 新版个人信息卡片 (替换原来的about-card) -->
+            <!-- 新版个人信息卡片 -->
             <div id="about-card" class="about-card">
                 <div class="card-container">
-                    <!-- 顶部：名字 + 头像 -->
                     <div class="header-section">
                         <div class="name-area">
                             <div class="my-name">羽生</div>
                             <div class="signature">祝我们此生兴致盎然，烟火灿烂。</div>
                         </div>
-
                         <div class="avatar-circle">
                             <img src="/头像/头像1.jpg" alt="avatar">
                         </div>
                     </div>
-
-                    <!-- 可展开模块 -->
                     <div class="expand-list">
                         <div class="expand-item">
                             <div class="expand-header">
@@ -120,7 +114,6 @@
                                 • 交换研学（境外）：澳门城市大学 媒体文化与艺术
                             </div>
                         </div>
-
                         <div class="expand-item">
                             <div class="expand-header">
                                 <span>技术栈 / Skill</span>
@@ -134,7 +127,6 @@
                                 ✦ 语言与证书： PTE69（≈雅思6.5）、CET-4/6、普通话一乙证书、C1驾照
                             </div>
                         </div>
-
                         <div class="expand-item">
                             <div class="expand-header">
                                 <span>联络 / Contact</span>
@@ -145,7 +137,6 @@
                                 •  微信: 111
                             </div>
                         </div>
-
                         <div class="expand-item">
                             <div class="expand-header">
                                 <span>声明 / Statement</span>
