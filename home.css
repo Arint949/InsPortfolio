@@ -58,7 +58,16 @@ html {
     height: 100vh;
     object-fit: cover;
     z-index: -2;
-    pointer-events: none;
+    pointer-events: none;   /* 禁止点击，防止弹出控件 */
+}
+
+/* ↓↓↓ 新增：隐藏所有原生视频控件（彻底消除播放按钮） ↓↓↓ */
+#bgVideo::-webkit-media-controls,
+#bgVideo::-webkit-media-controls-enclosure,
+#bgVideo::-webkit-media-controls-panel,
+#bgVideo::-webkit-media-controls-play-button,
+#bgVideo::-webkit-media-controls-start-playback-button {
+    display: none !important;
 }
 
 .video-overlay {
@@ -184,7 +193,7 @@ body {
     padding-left: 22rem;
     padding-right: 22rem;
     padding-top: 2rem;
-    gap: 10rem;  /* 默认间距，会在断点中调整 */
+    gap: 10rem;
 }
 
 .text-section {
@@ -539,7 +548,7 @@ body {
     }
     .main {
         padding: 2rem 18rem;
-        gap: 6rem;          /* 同步 work 的间距感受 */
+        gap: 6rem;
     }
     .welcome-text {
         font-size: 1.6rem;
@@ -709,6 +718,19 @@ body {
     }
     .expand-content {
         font-size: 0.9rem;
+    }
+
+    /* ========== 关键修复：让固定宽度元素自适应，防止溢出缩放 ========== */
+    .text-section {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 auto;
+    }
+    .lyrics {
+        max-width: 100%;
+    }
+    .player-section {
+        min-width: 0;
     }
 }
 
