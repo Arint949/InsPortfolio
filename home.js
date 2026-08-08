@@ -19,19 +19,18 @@ const outerDisc = document.querySelector(".outer-disc");
 const innerDisc = document.querySelector(".inner-disc");
 const lyricsCurrent = document.getElementById("lyricsCurrent");
 const songList = document.getElementById("songList");
+const lyricsArea = document.getElementById("lyricsArea");
 const playerContainer = document.getElementById("playerContainer");
 const aboutBtn = document.getElementById("about-btn");
 const aboutCard = document.getElementById("about-card");
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 const progressBar = document.querySelector(".progress-bar");
-const ringSvg = document.querySelector(".disc-progress-ring");
 const gradient = document.querySelector("#progressGradient");
 const playerSection = document.querySelector(".player-section");
 
 // 状态变量
 let currentTrackIndex = 0;
-let isDraggingProgress = false;
 let lastColor = progressColors[0];
 let isMini = false;
 let originalParent = null;
@@ -110,7 +109,15 @@ audio.onpause = () => {
     savePlayerState();
 };
 
-audio.addEventListener("timeupdate", () => savePlayerState());
+audio.addEventListener("timeupdate", () => {
+    savePlayerState();
+    // 更新进度环（只显示，不拖拽）
+    if (audio.duration && isFinite(audio.duration)) {
+        const circumference = 2 * Math.PI * 195;
+        const offset = circumference * (1 - audio.currentTime / audio.duration);
+        progressBar.style.strokeDashoffset = offset;
+    }
+});
 audio.addEventListener("ended", () => {
     currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
     loadTrack(currentTrackIndex);
@@ -121,22 +128,67 @@ audio.addEventListener("error", (e) => {
     alert("音乐文件加载失败，请检查 song 文件夹中的文件是否存在");
 });
 
-// 歌单点击
+// ===============================
+// 歌单点击（从头播放）
+// ===============================
 songList.querySelectorAll("li").forEach(li => {
     li.addEventListener("click", (e) => {
         e.stopPropagation();
         const idx = Number(li.dataset.index);
-        if (idx === currentTrackIndex && !audio.paused) {
-            audio.pause();
-        } else {
+        if (idx !== currentTrackIndex) {
             currentTrackIndex = idx;
             loadTrack(currentTrackIndex);
-            audio.play().catch(err => {
-                console.warn("播放需要用户交互:", err);
-                alert("请点击页面任意位置后重试播放");
-            });
+        }
+        // 从头播放
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+            console.warn("播放需要用户交互:", err);
+            alert("请点击页面任意位置后重试播放");
+        });
+        // 触摸模式下不隐藏列表，由外部点击隐藏；鼠标模式下悬停保持显示
+    });
+});
+
+// ===============================
+// 歌词区域交互：鼠标悬停 vs 触摸点击
+// ===============================
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+if (isTouchDevice) {
+    // ---------- 触摸模式 ----------
+    lyricsArea.classList.add('touch-mode');
+    // 点击歌词区域切换列表显示
+    lyricsArea.addEventListener('click', function(e) {
+        if (e.target.closest('.song-list')) return; // 点击列表内部不切换
+        this.classList.toggle('show-list');
+    });
+    // 点击列表内部不关闭（由歌单项处理）
+    songList.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    // 点击外部空白处关闭列表
+    document.addEventListener('click', function(e) {
+        if (!lyricsArea.contains(e.target)) {
+            lyricsArea.classList.remove('show-list');
         }
     });
+} else {
+    // ---------- 鼠标模式 ----------
+    // 完全依赖 CSS :hover，无需 JS 干预
+    // 但为了保证歌单点击和外部点击不影响悬停，无需额外代码
+}
+
+// ===============================
+// 大唱片点击切换播放/暂停（保留当前位置）
+// ===============================
+playerContainer.addEventListener('click', function(e) {
+    // 如果点击的是进度环内部也视为点击唱片
+    e.stopPropagation();
+    if (audio.paused) {
+        audio.play().catch(err => console.warn('播放失败', err));
+    } else {
+        audio.pause();
+    }
 });
 
 // ===============================
@@ -155,7 +207,7 @@ function toggleAbout() {
         playerContainer.classList.add("mini-disc");
         isMini = true;
         aboutCard.classList.add("active");
-        aboutBtn.classList.add("active");   // 添加高亮
+        aboutBtn.classList.add("active");
     } else {
         aboutCard.classList.remove("active");
         if (playerSection) {
@@ -165,7 +217,7 @@ function toggleAbout() {
         }
         playerContainer.classList.remove("mini-disc");
         isMini = false;
-        aboutBtn.classList.remove("active"); // 移除高亮
+        aboutBtn.classList.remove("active");
     }
     navMenu.classList.remove("active");
     savePlayerState();
@@ -193,76 +245,6 @@ document.querySelectorAll(".nav-link").forEach(link => {
 });
 
 // ===============================
-// 进度环拖拽
-// ===============================
-function getAngle(e) {
-    const rect = ringSvg.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    let clientX, clientY;
-    if (e.touches) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches[0].clientY;
-    } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-    }
-    let a = Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90;
-    if (a < 0) a += 360;
-    return a;
-}
-
-function setProgressFromAngle(angle) {
-    if (audio.duration && isFinite(audio.duration)) {
-        audio.currentTime = (angle / 360) * audio.duration;
-        savePlayerState();
-    }
-}
-
-ringSvg.addEventListener("mousedown", (e) => { e.preventDefault(); isDraggingProgress = true; });
-ringSvg.addEventListener("touchstart", (e) => { e.preventDefault(); isDraggingProgress = true; });
-document.addEventListener("mousemove", (e) => { if (isDraggingProgress) setProgressFromAngle(getAngle(e)); });
-document.addEventListener("touchmove", (e) => { if (isDraggingProgress) setProgressFromAngle(getAngle(e)); });
-document.addEventListener("mouseup", () => isDraggingProgress = false);
-document.addEventListener("touchend", () => isDraggingProgress = false);
-
-function syncProgress() {
-    if (!isDraggingProgress && audio.duration && isFinite(audio.duration)) {
-        const circumference = 2 * Math.PI * 195;
-        const offset = circumference * (1 - audio.currentTime / audio.duration);
-        progressBar.style.strokeDashoffset = offset;
-    }
-    requestAnimationFrame(syncProgress);
-}
-
-// 播放器内部点击（黑胶区域）控制播放暂停
-function getPlayerCenterAndRadius() {
-    const rect = playerContainer.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const outerRadius = rect.width / 2;
-    const innerRadius = outerRadius * 0.8;
-    return { cx, cy, innerRadius, outerRadius };
-}
-
-function onLargeDiscClick(e) {
-    if (isMini) {
-        audio.paused ? audio.play().catch(e => console.warn(e)) : audio.pause();
-        return;
-    }
-    const clientX = e.clientX;
-    const clientY = e.clientY;
-    const { cx, cy, innerRadius } = getPlayerCenterAndRadius();
-    const dx = clientX - cx;
-    const dy = clientY - cy;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist <= innerRadius) {
-        audio.paused ? audio.play().catch(e => console.warn(e)) : audio.pause();
-    }
-}
-playerContainer.addEventListener("click", onLargeDiscClick);
-
-// ===============================
 // 新卡片内部的展开/折叠交互
 // ===============================
 function initExpandItems() {
@@ -288,11 +270,9 @@ window.addEventListener("beforeunload", () => {
 // 初始化
 const hasSavedState = restorePlayerState();
 if (!hasSavedState) {
-    // 无保存状态：加载默认歌曲，并尝试自动播放（首页默认行为）
     loadTrack(0);
     audio.play().catch(e => console.log("自动播放被浏览器策略阻止，等待用户交互"));
 }
-syncProgress();
 initExpandItems();
 
 // ===============================
@@ -407,3 +387,18 @@ if (urlParams.get('about') === 'open') {
         }
     });
 }
+
+// ============================================================
+// 视频背景自动播放兜底
+// ============================================================
+(function() {
+    var video = document.getElementById('bgVideo');
+    if (video) {
+        video.play().catch(function(e) {
+            document.addEventListener('touchstart', function playOnce() {
+                video.play().catch(function(e2) {});
+                document.removeEventListener('touchstart', playOnce);
+            }, { once: true });
+        });
+    }
+})();
