@@ -1,9 +1,9 @@
-   /* work.css */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 html {
     scrollbar-width: none;   /* Firefox 隐藏滚动条 */
 }
@@ -172,7 +172,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 260px;
+    width: 120px; /* 固定可点击区域宽度 */
     max-height: 78px;
     overflow-y: auto;
     list-style: none;
