@@ -707,16 +707,59 @@ renderTimeline();
 })();
 
 // ============================================================
-// 视频背景自动播放兜底（与 home 页一致）
+// 视频背景自动播放终极兜底（兼容所有移动端）
 // ============================================================
 (function() {
     var video = document.getElementById('bgVideo');
-    if (video) {
-        video.play().catch(function(e) {
-            document.addEventListener('touchstart', function playOnce() {
-                video.play().catch(function(e2) {});
-                document.removeEventListener('touchstart', playOnce);
-            }, { once: true });
+    if (!video) return;
+
+    // 尝试播放函数
+    function attemptPlay() {
+        return video.play().catch(function(e) {
+            console.warn('视频播放失败:', e.message);
+            return false;
         });
     }
+
+    // 1. 立即尝试
+    var firstTry = attemptPlay();
+
+    // 2. 如果失败，监听用户手势
+    firstTry.then(function(success) {
+        if (!success) {
+            var events = ['touchstart', 'click', 'touchend', 'keydown'];
+            var handler = function() {
+                attemptPlay().then(function(ok) {
+                    if (ok) {
+                        // 播放成功后移除监听
+                        events.forEach(function(ev) {
+                            document.removeEventListener(ev, handler);
+                        });
+                    }
+                });
+            };
+            events.forEach(function(ev) {
+                document.addEventListener(ev, handler, { passive: true });
+            });
+        }
+    });
+
+    // 3. 页面可见性变化时重试（用户切换回页面）
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            attemptPlay();
+        }
+    });
+
+    // 4. 视频加载错误后重试
+    video.addEventListener('error', function() {
+        console.warn('视频错误，2秒后重试');
+        setTimeout(attemptPlay, 2000);
+    });
+
+    // 5. 如果意外结束，重新播放（loop 属性已存在，但保险）
+    video.addEventListener('ended', function() {
+        video.currentTime = 0;
+        attemptPlay();
+    });
 })();
