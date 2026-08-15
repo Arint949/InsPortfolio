@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>YIN's Field - 瞬/Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="moments.css">
+</head>
+<body>
+    <!-- 视频背景区域 -->
+    <div class="video-background">
+        <video autoplay loop muted playsinline webkit-playsinline preload="auto" id="bgVideo" class="bg-video">
+            <source src="https://img.tofaka.com/autoupload/f/4d0px/20260816/HKza/momentsBG.mp4" type="video/mp4">
+            您的浏览器不支持视频背景。
+        </video>
+        <div class="bg-overlay"></div>
+    </div>
+
+    <!-- 粒子画布容器（位于遮罩之上、内容之下） -->
+    <div id="particles"></div>
+
+    <header class="header">
+        <div class="logo">
+            YIN's Field
+            <ul class="hover-song-list" id="hoverSongList"></ul>
+        </div>
+
+        <div class="player-container mini-disc" id="miniPlayer">
+            <div class="outer-disc">
+                <div class="inner-disc"></div>
+            </div>
+        </div>
+
+        <nav class="nav" id="navMenu">
+            <a href="work.html" class="nav-link">工/Intern</a>
+            <a href="project.html" class="nav-link">项/Proj</a>
+            <a href="moments.html" class="nav-link active">瞬/Story</a>
+            <a href="home.html?about=open" id="about-link" class="nav-link">我/About</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <!-- 时间线视图 -->
+    <div id="timeline-view" class="view">
+        <div class="timeline-container" id="timeline-container"></div>
+    </div>
+
+    <!-- 详情视图 -->
+    <div id="detail-view" class="view hidden">
+        <div class="detail-content">
+            <h1 class="detail-title" id="back-timeline"></h1>
+            <p class="detail-body" id="detail-desc"></p>
+            <div class="detail-images" id="detail-images-box"></div>
+        </div>
+    </div>
+
+    <!-- 图片放大预览层 -->
+    <div id="img-preview" class="img-preview hidden">
+        <img id="preview-img" src="" alt="预览图">
+    </div>
+
+    <audio id="audio" preload="auto"></audio>
+    <script src="moments.js"></script>
+</body>
+</html>

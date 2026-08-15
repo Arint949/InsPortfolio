@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>YIN's Field - 项/Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <!-- 固定背景图片 -->
+    <div class="bg-image"></div>
+
+    <!-- 顶栏（与其他页面完全一致） -->
+    <header class="header">
+        <div class="logo">
+            YIN's Field
+            <ul class="hover-song-list" id="hoverSongList"></ul>
+        </div>
+
+        <!-- 迷你黑胶唱片（点击播放/暂停） -->
+        <div class="player-container mini-disc" id="miniPlayer">
+            <div class="outer-disc">
+                <div class="inner-disc"></div>
+            </div>
+        </div>
+
+        <nav class="nav" id="navMenu">
+            <a href="work.html" class="nav-link">工/Intern</a>
+            <a href="project.html" class="nav-link active">项/Proj</a>
+            <a href="moments.html" class="nav-link">瞬/Story</a>
+            <a href="home.html?about=open" id="about-link" class="nav-link">我/About</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </header>
+
+    <!-- 主区域：外层居中，内层顶部对齐 -->
+    <div class="main-wrap" id="mainWrap">
+        <div class="main-inner">
+            <!-- 左侧：拍立得（大明信卡片） -->
+            <div class="polaroid-container">
+                <div class="polaroid">
+                    <div class="polaroid-img" id="polaroidImg"></div>
+                    <div class="polaroid-caption" id="polaroidCaption">媒体心理学 | 项目组长</div>
+                </div>
+            </div>
+
+            <!-- 右侧：垂直滚动列表（小封面） -->
+            <div class="project-slider-container" id="projectSliderContainer">
+                <div class="project-slider" id="projectSlider">
+                    <!-- 由 JavaScript 动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情页 -->
+    <div id="detailPage">
+        <div class="detail-content">
+            <!-- 修改点：detail-back 和 detail-title 用 detail-left 包裹，实现紧凑排列 -->
+            <div class="detail-header">
+                <div class="detail-left">
+                    <div class="detail-back">❮</div>
+                    <div class="detail-title">媒体心理学 | 项目组长</div>
+                </div>
+                <div class="detail-date">2021.6-2021.8</div>
+            </div>
+            <ul class="detail-tasks">
+                <li>主导媒体心理学方向用户A/B测试实验设计与数据采集</li>
+                <li>负责团队进度统筹、实验流程标准化与成员分工协调</li>
+                <li>完成数据清洗与统计分析，输出实验报告并形成可复用模板</li>
+            </ul>
+            <!-- ★★★ 新增：展开/收起按钮（默认隐藏，由 JS 控制显隐） ★★★ -->
+            <div class="task-toggle" id="taskToggle">… （点击展开全文）▾</div>
+            <div class="detail-images">
+                <img src="proj/p1.jpg" alt="项目图片">
+                <img src="11/133-2.jpg" alt="项目图片">
+            </div>
+            <button class="back-btn" id="backBtn">❮  返回</button>
+        </div>
+    </div>
+
+    <audio id="audio" preload="auto"></audio>
+    <script src="project.js"></script>
+</body>
+</html>
