@@ -8,14 +8,12 @@
     <link rel="stylesheet" href="moments.css">
 </head>
 <body>
-    <!-- 视频背景区域 -->
-    <div class="video-background">
-        <video autoplay loop muted playsinline webkit-playsinline preload="auto" id="bgVideo" class="bg-video">
-            <source src="https://img.tofaka.com/autoupload/f/4d0px/20260816/HKza/momentsBG.mp4" type="video/mp4">
-            您的浏览器不支持视频背景。
-        </video>
-        <div class="bg-overlay"></div>
-    </div>
+    <!-- ===== 视频背景（与 home 完全一致） ===== -->
+    <video id="bgVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
+        <source src="https://img.tofaka.com/autoupload/f/4d0px/20260816/HKza/momentsBG.mp4" type="video/mp4">
+        您的浏览器不支持视频背景。
+    </video>
+    <div class="video-overlay"></div>
 
     <!-- 粒子画布容器（位于遮罩之上、内容之下） -->
     <div id="particles"></div>
