@@ -36,16 +36,7 @@ html {
     src: url('Font/字小魂阿开漫画体.ttf') format('truetype');
 }
 
-/* 视频背景 + 遮罩 */
-body {
-    background: #000;
-    color: #fff;
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-    font-family: system-ui, 'Segoe UI', sans-serif;
-    position: relative;
-}
+/* ===== 视频背景容器 ===== */
 .video-background {
     position: fixed;
     top: 0;
@@ -54,7 +45,9 @@ body {
     height: 100vh;
     z-index: -2;
     overflow: hidden;
+    pointer-events: none;          /* 容器禁止点击 */
 }
+
 .video-background video {
     position: absolute;
     top: 0;
@@ -62,21 +55,45 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none;
+    pointer-events: none;          /* 禁止点击视频 */
 }
+
+/* 隐藏所有原生视频控件（针对 video 元素） */
+.video-background video::-webkit-media-controls,
+.video-background video::-webkit-media-controls-enclosure,
+.video-background video::-webkit-media-controls-panel,
+.video-background video::-webkit-media-controls-play-button,
+.video-background video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+
+/* ===== 遮罩层 ===== */
 .bg-overlay {
-    position: absolute;
+    position: absolute;            /* 相对于 .video-background 定位 */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.45); /* 调整为与示例相同的透明度 */
     pointer-events: none;
-    z-index: 1;
+    z-index: 1;                    /* 放在视频之上 */
     transition: background 0.18s ease;
 }
+
+/* 若保留暗色切换类，可保留，否则删除 */
 .bg-overlay.dark {
     background: rgba(0, 0, 0, 0.7);
+}
+
+/* ===== 页面主体 ===== */
+body {
+    background: transparent;       /* 改为透明，让视频显示 */
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-family: system-ui, 'Segoe UI', sans-serif;
+    margin: 0;
 }
 
 /* 粒子层 */
