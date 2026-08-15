@@ -301,6 +301,10 @@ function initExpandItems() {
                 updateCenterState();
                 // 重新计算 mask（因为展开后内容高度变化，影响重叠判断）
                 handleMaskScroll();
+                // 延迟重新检测附件溢出（等待内容渲染完成）
+                setTimeout(() => {
+                    checkAttachmentsOverflow();
+                }, 100);
             });
         }
     });
@@ -343,6 +347,63 @@ function initExpandItems() {
 }
 
 // ===============================
+// 附件折叠/展开交互
+// ===============================
+function initAttachmentsToggle() {
+    const toggleButtons = document.querySelectorAll('.attachments-toggle');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();   // 防止冒泡到 expand-header
+            const wrapper = this.closest('.attachments').querySelector('.attachments-wrapper');
+            if (wrapper) {
+                wrapper.classList.toggle('expanded');
+                this.classList.toggle('expanded');
+            }
+        });
+    });
+    // 初始时所有条目折叠，不检测，等展开时再检测
+}
+
+// 检测每个附件列表是否超过一行，若不超过则隐藏箭头（仅当条目展开时）
+function checkAttachmentsOverflow() {
+    const expandItems = document.querySelectorAll('.expand-item.active');
+    expandItems.forEach(item => {
+        const wrappers = item.querySelectorAll('.attachments-wrapper');
+        wrappers.forEach(wrapper => {
+            const toggle = wrapper.closest('.attachments').querySelector('.attachments-toggle');
+            if (!toggle) return;
+            // 确保折叠状态
+            wrapper.classList.remove('expanded');
+            toggle.classList.remove('expanded');
+            
+            const list = wrapper.querySelector('.attachments-list');
+            if (!list) {
+                toggle.style.display = 'none';
+                return;
+            }
+            const firstItem = list.querySelector('.attachment-item');
+            if (!firstItem) {
+                toggle.style.display = 'none';
+                return;
+            }
+            // 计算单行高度：第一个 item 的高度 + list 的上下内边距
+            const itemHeight = firstItem.offsetHeight;
+            const listStyle = getComputedStyle(list);
+            const paddingTop = parseFloat(listStyle.paddingTop) || 0;
+            const paddingBottom = parseFloat(listStyle.paddingBottom) || 0;
+            const singleRowHeight = itemHeight + paddingTop + paddingBottom;
+            
+            // 如果列表实际高度大于单行高度，说明有多行 → 显示箭头
+            if (list.scrollHeight > singleRowHeight + 2) { // 2px 容差
+                toggle.style.display = 'block';
+            } else {
+                toggle.style.display = 'none';
+            }
+        });
+    });
+}
+
+// ===============================
 // 初始化所有功能
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
@@ -353,12 +414,15 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.pause();
     }
     initExpandItems();
+    initAttachmentsToggle();   // 新增附件折叠功能
     
     // 滚动 mask 更新
     window.addEventListener('scroll', handleMaskScroll, { passive: true });
     window.addEventListener('resize', () => {
         handleMaskScroll();
         if (!isAnyExpandActive()) centerWorkList();
+        // 窗口大小变化时重新检测附件溢出（仅对已展开条目）
+        setTimeout(checkAttachmentsOverflow, 200);
     });
     
     // 初始居中
@@ -366,3 +430,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始 mask 更新
     handleMaskScroll();
 });
+
+// ===============================
+// 可选：自动获取链接标题（需解决跨域，建议手动填写）
+// ===============================
+// 如果希望自动获取网页标题，可以启用下方代码（但受 CORS 限制，仅部分站点可用）
+// 更推荐的方式是手动在 .attachment-name 中填写标题缩略
+/*
+document.querySelectorAll('.attachment-item[data-type="link"]').forEach(item => {
+    const url = item.href;
+    if (url && !url.startsWith('#')) {
+        fetch(url, { mode: 'no-cors' })
+            .then(res => res.text())
+            .then(html => {
+                const title = html.match(/<title>([^<]*)<\/title>/);
+                if (title && title[1]) {
+                    const short = title[1].slice(0, 12) + '...';
+                    item.querySelector('.attachment-name').textContent = short;
+                }
+            })
+            .catch(() => {});
+    }
+});
+*/
