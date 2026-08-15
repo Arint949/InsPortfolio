@@ -36,64 +36,49 @@ html {
     src: url('Font/字小魂阿开漫画体.ttf') format('truetype');
 }
 
-/* ===== 视频背景容器 ===== */
-.video-background {
+/* ===== 视频背景（与 home 完全一致） ===== */
+#bgVideo {
     position: fixed;
     top: 0;
     left: 0;
+    min-width: 100%;
+    min-height: 100%;
     width: 100vw;
     height: 100vh;
-    z-index: -2;
-    overflow: hidden;
-    pointer-events: none;          /* 容器禁止点击 */
-}
-
-.video-background video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    pointer-events: none;          /* 禁止点击视频 */
+    z-index: -2;
+    pointer-events: none;   /* 禁止点击，防止弹出控件 */
 }
 
-/* 隐藏所有原生视频控件（针对 video 元素） */
-.video-background video::-webkit-media-controls,
-.video-background video::-webkit-media-controls-enclosure,
-.video-background video::-webkit-media-controls-panel,
-.video-background video::-webkit-media-controls-play-button,
-.video-background video::-webkit-media-controls-start-playback-button {
+/* 隐藏所有原生视频控件 */
+#bgVideo::-webkit-media-controls,
+#bgVideo::-webkit-media-controls-enclosure,
+#bgVideo::-webkit-media-controls-panel,
+#bgVideo::-webkit-media-controls-play-button,
+#bgVideo::-webkit-media-controls-start-playback-button {
     display: none !important;
 }
 
-/* ===== 遮罩层 ===== */
-.bg-overlay {
-    position: absolute;            /* 相对于 .video-background 定位 */
+.video-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.45); /* 调整为与示例相同的透明度 */
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
     pointer-events: none;
-    z-index: 1;                    /* 放在视频之上 */
-    transition: background 0.18s ease;
 }
 
-/* 若保留暗色切换类，可保留，否则删除 */
-.bg-overlay.dark {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-/* ===== 页面主体 ===== */
+/* 页面主体背景改为透明，让视频显示 */
 body {
-    background: transparent;       /* 改为透明，让视频显示 */
+    background: transparent;
     color: #fff;
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
     font-family: system-ui, 'Segoe UI', sans-serif;
-    margin: 0;
+    position: relative;
 }
 
 /* 粒子层 */
@@ -112,7 +97,7 @@ body {
     height: 100%;
 }
 
-/* 顶栏 */
+/* 顶栏（与之前完全相同，未改动） */
 .header {
     display: flex;
     justify-content: flex-start;
