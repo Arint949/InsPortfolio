@@ -11,10 +11,10 @@
     <!-- 固定背景图片（112.jpg） -->
     <div class="bg-image"></div>
 
+    <!-- 顶栏（与其他页面完全一致） -->
     <header class="header">
         <div class="logo">
             YIN's Field
-            <!-- 悬浮歌单列表（位于 logo 内部，但仅由迷你唱片触发显示） -->
             <ul class="hover-song-list" id="hoverSongList"></ul>
         </div>
 
@@ -28,7 +28,7 @@
         <nav class="nav" id="navMenu">
             <a href="work.html" class="nav-link active">工/Intern</a>
             <a href="project.html" class="nav-link">项/Proj</a>
-            <a href="moments.html" class="nav-link">瞬/Moments</a>
+            <a href="moments.html" class="nav-link">瞬/Story</a>
             <a href="home.html?about=open" id="about-link" class="nav-link">我/About</a>
         </nav>
         <div class="menu-toggle" id="menuToggle">
@@ -39,57 +39,42 @@
     <main class="work-main">
         <div class="work-container">
             <div class="expand-list" id="workExpandList">
-                <!-- 条目 4 -->
+
+                <!-- 条目 1 中央广播电视总台 - 国广国际在线网络（北京）有限公司 | AIGC生成岗&产品助理 -->
                 <div class="expand-item">
                     <div class="expand-header">
-                        <span class="company">深圳悦动体育 | 生活助教&内容宣传</span>
+                        <span class="company">央广总台 - 国广国际在线网络（北京）有限公司 | 实习生组长 | AIGC生成岗&产品助理</span>
                         <div class="right-area">
-                            <span class="date">2025.7 - 2025.8（兼职）</span>
+                            <span class="date">2024.10 – 2025.5</span>
                             <span class="toggle-btn">+</span>
                         </div>
                     </div>
                     <div class="expand-content">
-                        <p>✦ <b>用户需求捕捉：</b> 基于对60+亲子家庭的深度服务，洞察家长对于“孩子成长可视化”的刚性需求，通过定制化内容记录孩子成长</p>
+                        <p>✦ <b>AI内容生产全链路落地：</b> 主导“文字剧本 → 分镜脚本 → AI生成 → 二创精修”全链路，通过精细化Prompt调优解决风格错乱、细节崩坏问题，沉淀标准化AIGC生产SOP，高效支撑团队完成50+场景素材的高质量产出。</p>
                         <br>
-                        <p>✦ <b>内容落地验证：</b> 针对家长需求，独立完成日常店铺运营和两期夏令营的内容剪辑，产出23条主题短视频并同步至品牌公众号。根据家长和教练反馈，持续调整内容主题与呈现形式，单篇平均互动量稳定在30+，成功验证了成长类内容的用户价值和市场潜力。</p>
-                        </div>
-                </div>
-                
-                <!-- 条目 1 -->
-                <div class="expand-item">
-                    <div class="expand-header">
-                        <span class="company">央视总台 - 国广国际在线网络（北京）有限公司 | 产品助理</span>
-                        <div class="right-area">
-                            <span class="date">2025.3 – 2025.5</span>
-                            <span class="toggle-btn">+</span>
-                        </div>
-                    </div>
-                    <div class="expand-content">
-                        <p>✦ <b>AI工具场景调研：</b>洞察内容生产团队在图片/视频处理及文案创作场景下，对高效AI工具的迫切需求。主导对5款主流AI修图插件进行功能、场景与收费模式的横向对比分析，明确各工具优劣势，为团队AI工具选型提供数据驱动的决策依据，助力提升内容生产效率。</p>
+                        <p>✦ <b>AI工具选型与需求调研：</b> 针对图片处理、视频生成、文案创作等业务场景，调研并撰写AI工具需求的PRD文档；横向测评5款主流AI修图插件，输出功能、场景、收费模式对比分析，为团队AI工具选型提供数据驱动的决策依据。</p>
                         <br>
-                        <p>✦ <b>业务流程优化落地：</b>针对版权确权与公证流程繁琐、成本高昂的行业痛点，独立完成主流平台的功能拆解与收费模式对比，输出《版权确权与公证行业调研报告》。报告被内部采纳，为优化版权管理流程提供了可行性方案。</p>
+                        <p>✦ <b>生成效果评估与产品迭代：</b> 深度测评“楼兰AI”等主流创作平台，建立AI生成内容测评标准，输出竞品分析报告；提出的“多图批量生成”、“UI交互优化”等建议被技术团队采纳并上线，有效提升平台内容生产能力与用户体验。</p>
+                        <br>
+                        <p>✦ <b>团队统筹与管理：</b> 作为实习生组长，统筹素材审核、任务拆分与进度管理；搭建「需求接收 → 内容创作 → 审核交付 → 数据优化」工作闭环，根据交付反馈反向优化分镜脚本与创作流程 。</p>
+
+                        <!-- ===== 新增附件列表 ===== -->
+                        <div class="attachments">
+                            <button class="attachments-toggle" aria-label="展开/收起附件">▾</button>
+                            <div class="attachments-wrapper">
+                                <div class="attachments-list">
+                                    <!-- 链接示例：公众号视频 -->
+                                    <a href="https://weixin.qq.com/sph/Au1HQyxqSR" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">🔗</span>
+                                        <span class="attachment-name">《寻龙纪》宣传片：生命探索的...</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 条目 2 -->
-                <div class="expand-item">
-                    <div class="expand-header">
-                        <span class="company">央视总台 - 国广国际在线网络（北京）有限公司 | AIGC生成岗</span>
-                        <div class="right-area">
-                            <span class="date">2024.10 – 2025.1</span>
-                            <span class="toggle-btn">+</span>
-                        </div>
-                    </div>
-                    <div class="expand-content">
-                        <p>✦ <b>与技术团队协作迭代产品功能：</b>通过深度测评主流AI创作工具，发现楼兰AI平台在多图批量生成及UI交互方面的不足。独立完成竞品分析报告，提出针对性功能优化建议，被技术团队采纳并推动上线，有效提升了平台的产品能力和用户体验。</p>
-                        <br>
-                        <p>✦ <b>Prompt优化 / 生成体验调优：</b>针对文字剧本到分镜动画AI生成过程中存在的风格错乱、细节崩坏等痛点，主导全链路生成流程。通过多轮Prompt精细化调优，解决生成内容不稳定问题，沉淀标准化AIGC生产SOP，实现了创意想法的快速Demo化和验证迭代。</p>
-                        <br>
-                        <p>✦ <b>需求闭环与团队项目管理：</b>作为实习生组长，洞察业务方对内容质量和交付效率的需求。统筹素材审核与项目进度管理，并根据业务交付反馈，反向优化创作流程与分镜脚本，形成了从需求到交付再到优化的闭环管理。</p>
-                    </div>
-                </div>
-
-                <!-- 条目 3 -->
+                <!-- 条目 2 地球一小时观影局 | AI插画师 -->
                 <div class="expand-item">
                     <div class="expand-header">
                         <span class="company">地球一小时观影局 | AI插画师</span>
@@ -99,35 +84,176 @@
                         </div>
                     </div>
                     <div class="expand-content">
-                        <p>✦ <b>AI创意内容落地：</b>洞察社区用户对具有高质量审美的可持续主题插画内容的需求。通过精细化Prompt调优技术，将多批次生成的图片统一为固定目标系列画风，确保图像在色彩、构图、逻辑上符合社区用户审美，成功产出系列插画内容。</p>
-                        <p>✦ <b>用户反馈驱动迭代：</b>发布系列推文（累计阅读量8000+、互动量1000+）并收集用户反馈，根据反馈数据调整插画风格与主题方向，验证了AI生成内容在社区场景的用户价值，“非遗刺绣”系列更获得可持续业内诸多负责人好评。</p>
+                        <p>✦ <b>AI插画与Prompt标准化：</b>负责非遗、可持续主题 AI 系列插画创作，通过标准化 Prompt 实现多批次作品风格统一，稳定产出系列化视觉内容。</p>
+                        <br>
+                        <p>✦ <b>数据驱动内容策略与迭代：</b>运营公众号主题推文，累计阅读 8000+、社区互动 1000+，基于用户评论与互动数据迭代内容风格、选题方向，提升内容社区认可度。</p>
+
+                        <!-- ===== 新增附件列表 ===== -->
+                        <div class="attachments">
+                            <button class="attachments-toggle" aria-label="展开/收起附件">▾</button>
+                            <div class="attachments-wrapper">
+                                <div class="attachments-list">
+                                    <!-- 链接示例：公众号文章 -->
+                                    <a href="https://mp.weixin.qq.com/s/EfUs51tnMuZp4Rj_GcK_sw" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">12月地球日历 | 与地球的年末之约</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/rWDGkxUXw1hlq01VIFG--Q" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">11月地球日历 | 不用购买，也能...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/oDEFY46-QfYCbuVXhNWUqg" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">10月地球日历 | 赴一场世界动物...</span>
+                                    </a>
+                                    <a href="https://weixin.qq.com/sph/Au1HQyxqSR" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">9月地球日历 | 20个可持续节日...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/fkxpgk2uvZCtEu6AoLwi2A" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">8月地球日历 | 邀你和地球上的“...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/bGZduc-ycn_NSv424Ai0Ng" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">7月地球日历 | 今年地球生态超...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/IYSEmtkC_hrtHTDJPyYqNQ" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">6月地球日历 | 海洋月，以光...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/wrsw9yYwHRGtzKepeYVjgA" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">5月地球日历 | 可持续节日影单...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/gvsjgHHwzjSUHcsPsZG1tw" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">4月地球日历 | 从白海豚跃浪到...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/_3s-wyf1ohYbEuiIbow6LQ" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">3月地球日历 | 在首个世界冰川...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/4ShjYQiul4oUsWx6hlSpgw" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">2月地球日历 | 非遗邂逅可持续...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/qoSQ1aZJvzVp3pgSW4ACIQ" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">24.10地球日历 | 绿动金秋...</span>
+                                    </a>
+                                    <a href="https://mp.weixin.qq.com/s/tMp6Rsap5FOn2kCL0_mkgg" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📗</span>
+                                        <span class="attachment-name">24.9地球日历 | 环保故事集...</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- 条目 5 -->
+                <!-- 条目 3 国风手作店铺新媒体协助 | 小红书多矩阵账号运营 -->
                 <div class="expand-item">
                     <div class="expand-header">
-                        <span class="company">浪尾弦 | 小红书内容运营</span>
+                        <span class="company">国风手作店铺新媒体协助 | 小红书多矩阵账号运营</span>
                         <div class="right-area">
-                            <span class="date">2024.5– 2024.9（个人账号）</span>
+                            <span class="date">2025.2（短期兼职）</span>
+                            <span class="toggle-btn">+</span>
+                        </div>
+                    </div>
+                    <div class="expand-content">
+                        <p>✦ <b>内容定位：</b>聚焦古风发簪小众手作赛道，搭建多账号矩阵种草模式，以国风氛围感视觉内容吸引国风配饰垂类爱好者，精准沉淀审美型消费用户，适配微型作坊低成本获客需求。</p>
+                        <br>
+                        <p>✦ <b>用户反馈驱动迭代：</b>独立完成发簪静物实拍、细节素材、氛围感图文全量产出，产出可直接上架电商素材，支撑店铺日常上新与短视频内容供给。</p>
+                        <br>
+                        <p>✦ <b>用户反馈驱动迭代：</b>参与公域引流路径，将笔记粉丝沉淀小红书群 + 微信私域，落地新品优先购、拼单预售、福袋抽奖、直播促活 4 类转化玩法，依靠预售模式降低店铺库存压力。</p>
+                        <br>
+                        <p>✦ <b>用户反馈驱动迭代：</b>复盘图文 / 短视频视觉适配差异，明确静物图、人像氛围感素材差异化拍摄逻辑，输出 2 页店铺视觉运营复盘，指导后续内容迭代；账号常规笔记 30–80 赞，小爆款单篇收藏破 400，持续沉淀高购买力一二线国风女性用户。</p>
+                    </div>
+                </div>
+
+                <!-- 条目 4 个人自媒体运营（小红书账号：浪尾弦） | 个人账号 -->
+                <div class="expand-item">
+                    <div class="expand-header">
+                        <span class="company">个人自媒体运营（小红书账号：浪尾弦） | 个人账号</span>
+                        <div class="right-area">
+                            <span class="date">2024.5– 2024.9</span>
                             <span class="toggle-btn">+</span>
                         </div>
                     </div>
                     <div class="expand-content">
                         <p>✦ <b>内容定位：</b>聚焦音乐垂直领域，构建“情绪共鸣+饭圈热点”双驱动的内容分发策略，精准切入Z世代用户痛点，确立账号差异化定位。</p>
                         <br>
-                        <p>✦ <b>爆款选题与用户洞察：</b>基于用户“情感宣泄”与“CP磕糖”心理，策划《近期be感最强的一首歌》等高传播性选题，单篇最高曝光量8500+，互动率超1%，验证了对内容热点的快速捕捉能力与选题策划有效性。</p>
+                        <p>✦ <b>选题与用户洞察：</b>基于用户“情感宣泄”与“CP磕糖”心理，策划《近期be感最强的一首歌》等高传播性选题，单篇最高曝光量8500+，互动率超1%，验证了对内容热点的快速捕捉能力与选题策划有效性。</p>
                         <br>
                         <p>✦ <b>内容形态与标签优化：</b>运用“饭圈黑话”与“治愈系金句”建立独特文案风格，通过A/B测试验证“情绪标签+强互动引导”是提升新号冷启动流量的关键策略，据此优化内容分发逻辑，提升账号权重。</p>
                         <br>
                         <p>✦ <b>用户互动与社区运营：</b>通过评论互动与用户反馈收集，建立“内容发布-数据反馈-策略迭代”的运营闭环，提升粉丝粘性与社区活跃度。</p>
+
+                        <!-- ===== 新增附件列表 ===== -->
+                        <div class="attachments">
+                            <button class="attachments-toggle" aria-label="展开/收起附件">▾</button>
+                            <div class="attachments-wrapper">
+                                <div class="attachments-list">
+                                    <!-- 链接示例：小红书文章 -->
+                                    <a href="https://www.xiaohongshu.com/discovery/item/663baff9000000001e01b92f?source=webshare&xhsshare=pc_web&xsec_token=ABTddD47TXv4BwTRXQu4i2YBiESru5IpcIgY-4ysZ_UUQ=&xsec_source=pc_share" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📕</span>
+                                        <span class="attachment-name">近期be感最强的一首歌</span>
+                                    </a>
+
+                                    <!-- 链接示例：小红书文章 -->
+                                    <a href="https://www.xiaohongshu.com/discovery/item/66f8eee2000000002c028d86?source=webshare&xhsshare=pc_web&xsec_token=ABxVarUavy9OtRXxEpzuV3JMvxbSLlRCdsEdsQnNi4Rwc=&xsec_source=pc_share" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📕</span>
+                                        <span class="attachment-name">这疯狂溢出屏幕的姐狗感！！！</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 条目 6 -->
+                <!-- 条目 5 深圳悦动体育 | 内容宣传 -->
                 <div class="expand-item">
                     <div class="expand-header">
-                        <span class="company">重庆大学出版社 | 图文编辑</span>
+                        <span class="company">深圳悦动体育 | 内容宣传</span>
+                        <div class="right-area">
+                            <span class="date">2025.7 - 2025.8</span>
+                            <span class="toggle-btn">+</span>
+                        </div>
+                    </div>
+                    <div class="expand-content">
+                        <p>✦ <b>用户研究与内容产品定位：</b>深入理解亲子生活服务类用户的决策心理与内容转化逻辑，洞察60+亲子家庭内容需求，主打成长记录可视化内容定位。</p>
+                        <br>
+                        <p>✦ <b>内容产品落地，构建内容‑转化闭环：</b>独立负责篮球夏令营营地内容运营与转化（GMV），针对亲子家庭（本地生活核心客群）痛点，策划‘成长可视化’内容，独立策划、拍摄、剪辑23条短视频并挂载报名入口，单条平均互动从个位数提升至30+，互动量提升5倍，有效提升了潜在客户的咨询转化率与品牌信任度。</p>
+                        <br>
+                        <p>✦ <b>迭代与价值验证：</b>收集家长、教练反馈持续迭代内容形式与脚本结构，验证垂类短视频内容传播价值。</p>
+
+                        <!-- ===== 新增附件列表 ===== -->
+                        <div class="attachments">
+                            <button class="attachments-toggle" aria-label="展开/收起附件">▾</button>
+                            <div class="attachments-wrapper">
+                                <div class="attachments-list">
+                                    <!-- 链接示例：公众号 -->
+                                    <a href="https://weixin.qq.com/sph/AXrFI8eZM1" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">🔗</span>
+                                        <span class="attachment-name">夏令营-户外研学篇</span>
+                                    </a>
+
+                                    <a href="https://weixin.qq.com/sph/AlSfyQuAEW" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">🔗</span>
+                                        <span class="attachment-name">夏令营-日常友谊篇</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 条目 6 重庆大学出版社 | 图文编辑 -->
+                <div class="expand-item">
+                    <div class="expand-header">
+                        <span class="company">重庆大学出版社 | 实习生组长 | 图文编辑</span>
                         <div class="right-area">
                             <span class="date">2024.4 - 2024.6</span>
                             <span class="toggle-btn">+</span>
@@ -136,28 +262,51 @@
                     <div class="expand-content">
                         <p>✦ 为时尚系列丛书撰写文稿（文末标注署名）。</p>
                         <p>✦ 管理8人内容团队，团队交付12篇高质量图文内容，单篇赞藏数由个位数提升至100+。</p>
+
+                        <!-- ===== 新增附件列表 ===== -->
+                        <div class="attachments">
+                            <button class="attachments-toggle" aria-label="展开/收起附件">▾</button>
+                            <div class="attachments-wrapper">
+                                <div class="attachments-list">
+                                    <!-- 链接示例：小红书文章 -->
+                                    <a href="https://www.xiaohongshu.com/discovery/item/66306931000000001e033e4b?source=webshare&xhsshare=pc_web&xsec_token=ABLoi8kNq3ERtVuPMeiq5-tGbjY_lhHv_80l-axsd8_ME=&xsec_source=pc_share" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📕</span>
+                                        <span class="attachment-name">前卫美学的破壁者：高缇耶x张国荣</span>
+                                    </a>
+
+                                    <!-- 链接示例：小红书文章 -->
+                                    <a href="https://www.xiaohongshu.com/discovery/item/66383e1f000000001e03289c?source=webshare&xhsshare=pc_web&xsec_token=ABsAk_HMewR4MhMlKzIH8vUXpN80bq2tToxnRMHJ_325g=&xsec_source=pc_share" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📕</span>
+                                        <span class="attachment-name">山本耀司自传，颠覆你的时尚观</span>
+                                    </a>
+
+                                    <!-- 链接示例：小红书文章 -->
+                                    <a href="https://www.xiaohongshu.com/discovery/item/663c866a000000001e032e12?source=webshare&xhsshare=pc_web&xsec_token=ABGQSHxY6CF2dYnE9Ej18FiguvrKF9SD8EEmCeGNxwrIU=&xsec_source=pc_share" target="_blank" class="attachment-item" data-type="link">
+                                        <span class="attachment-icon">📕</span>
+                                        <span class="attachment-name">最甜腻的薄荷蓝｜买下蒂芙尼</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 条目 7 -->
+                <!-- 条目 7 杭州路野文化传媒有限公司 | 媒介BD -->
                 <div class="expand-item">
                     <div class="expand-header">
-                        <span class="company">杭州路野文化传媒有限公司 | 媒介BD</span>
+                        <span class="company">杭州路野文化传媒有限公司 | 实习生组长 | 媒介BD</span>
                         <div class="right-area">
                             <span class="date">2024.3 - 2024.5</span>
                             <span class="toggle-btn">+</span>
                         </div>
                     </div>
                     <div class="expand-content">
-                        <p>✦ 筛选与甲方产品合适的达人并建立联系，获取达人报价后评估双方匹配度（达人来源包括抖音和小红书）</p>
+                        <p>✦ 筛选与甲方产品合适的达人并建立联系，获取达人报价后评估双方匹配度（达人来源包括抖音和小红书）。</p>
                         <p>✦ 在品牌与达人间进行对接，确保广告正常投放。</p>
                         <p>✦ 组长职责，统计组员绩效，传达上级通知，记录例会要点，及时解答组员疑问，及时与上级沟通。</p>
                     </div>
                 </div>
-
-
-
-                </div>
+                
             </div>
         </div>
     </main>
