@@ -26,12 +26,6 @@ html {
     src: url('Font/通知：明天放假.ttf') format('truetype');
     font-display: swap;
 }
-@font-face {
-    font-family: 'my-custom-font';
-    src: url('Font/字小魂阿开漫画体.ttf') format('truetype');
-    font-display: swap;
-}
-
 
 /* 英文字体：覆盖基本拉丁字母及常用符号 */
 @font-face {
@@ -148,12 +142,12 @@ body {
 .nav {
     display: flex;
     gap: 2.1rem;
-    font-family: 'font-nav';
+    font-family: 'MixedFont', cursive;
     margin-left: auto;
 }
 .nav-link {
-    font-family: 'font-nav';
-    font-size: 1.3rem;
+    font-family: 'MixedFont', cursive;
+    font-size: 1.15rem;
     text-decoration: none;
     color: #fff;
     background: none;
@@ -383,7 +377,7 @@ body {
     background: transparent;
     backdrop-filter: none;
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 6px;
+    border-radius: 2px;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
@@ -425,7 +419,7 @@ body {
 }
 
 .my-name {
-    font-family: 'my-custom-font', cursive;
+    font-family: 'MixedFont', cursive;
     font-size: 2.6rem;
     font-weight: bold;
     color: #fff;
