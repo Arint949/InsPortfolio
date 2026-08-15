@@ -705,3 +705,18 @@ renderTimeline();
     }
     animate();
 })();
+
+// ============================================================
+// 视频背景自动播放兜底（与 home 页一致）
+// ============================================================
+(function() {
+    var video = document.getElementById('bgVideo');
+    if (video) {
+        video.play().catch(function(e) {
+            document.addEventListener('touchstart', function playOnce() {
+                video.play().catch(function(e2) {});
+                document.removeEventListener('touchstart', playOnce);
+            }, { once: true });
+        });
+    }
+})();
